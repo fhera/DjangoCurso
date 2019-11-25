@@ -56,3 +56,5 @@ docs/_build/
 
 # PyBuilder
 target/
+
+ow/beer_warehouse_live/.vscode/
