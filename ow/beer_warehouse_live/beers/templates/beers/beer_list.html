@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>{{company}}
+    {% comment %} {{ b_day }}S {% endcomment %}
+    {% comment %} {% now "jS F Y H:i" %} {% endcomment %}
+    {% comment %} {% now "d-m-Y" %} {% endcomment %}
+    <ul>
+        {% for beer in beer_list %}
+        {% comment %}
+        <p>
+            {{forloop}}
+            {{forloop.counter}}
+        </p>
+        {% endcomment %}
+
+        {% comment %} {% if beer.abv > 5 %} {% endcomment %}
+        {% comment %} {% if not beer.is_alcoholic %} {% endcomment %}
+        <li>
+            {{ beer.name|first }}
+            <a href="{% url 'beer-detail-view' beer.pk %}"> {{ beer }}</a>
+            {{ beer.created_at|date:"D d M Y" }}
+            {{ beer.is_filter|yesno:"claro, para nada" }}
+
+        </li>
+        {% comment %} {% else %}
+        excluida {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
+        {% empty %}
+        Esto será lo que se muestre si está vacíos
+        {% endfor %}
+        <ul>
+</div>
+
+{% endblock %}

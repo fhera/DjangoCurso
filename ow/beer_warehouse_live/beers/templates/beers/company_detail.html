@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>
+    {{ company }} -
+    <a href="{% url 'company-edit-view' company.pk %}">Edit</a>
+</p>
+
+{% endblock %}

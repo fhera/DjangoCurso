@@ -3,6 +3,7 @@ from django.db import models
 from beers.utils import image_upload_location
 from core.models import CommonInfo
 
+
 # Create your models here.
 
 
@@ -66,7 +67,7 @@ class SpecialIngredients(CommonInfo):
     name = models.CharField('Name', max_length=50)
     # ManyToMany
     beers = models.ManyToManyField(
-        Beer, blank=True, related_name="special_ingrdients")
+        Beer, blank=True, related_name="special_ingredients")
 
     class Meta:
         verbose_name = "Special Ingredient"

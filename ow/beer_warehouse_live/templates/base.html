@@ -6,11 +6,12 @@
     <link href="{% static 'css/starter-template.css' %}" rel="stylesheet">
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% if request.user.is_authenticated %}
+        {% include 'navbar.html' %}
+    {% endif %}
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
         {% block content %}
         {% endblock %}
     </div>

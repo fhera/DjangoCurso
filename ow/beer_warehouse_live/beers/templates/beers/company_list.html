@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <ul>
+        {% for company in object_list %}
+
+        <li>
+            <a href="{% url 'company-detail-view' company.pk %}"> {{ company }}</a>
+        </li>
+        {% empty %}
+        Esto será lo que se muestre si está vacíos
+        {% endfor %}
+    </ul>
+    <p>
+        <a href="{% url 'company-create-view' %}">Add</a>
+    </p>
+</div>
+
+{% endblock %}
