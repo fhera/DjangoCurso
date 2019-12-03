@@ -2,8 +2,9 @@ from os import path
 
 from django.urls import path, re_path
 
-from .views import (BeerDetailView, BeerListView, CompanyUpdateView,
-                    CompanyDetailView, CompanyListView, CompanyCreateView)
+from .views import (BeerDetailView, BeerListView, CompanyAndBeersCreateView,
+                    CompanyCreateView, CompanyDetailView, CompanyListView,
+                    CompanyUpdateView)
 
 urlpatterns = [
     path('list/', BeerListView.as_view(), name='beer-list-view'),
@@ -17,6 +18,11 @@ urlpatterns = [
         r'^company/create/$',
         CompanyCreateView.as_view(),
         name='company-create-view'
+    ),
+    re_path(
+        r'^company/create-with-beers/$',
+        CompanyAndBeersCreateView.as_view(),
+        name='company-and-beers-create-view'
     ),
     re_path(
         r'company/edit/(?P<pk>\d+)',

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h3>Create company with beers</h3>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <h4>Create beers</h4>
+
+    {{ beer_formset.as_p }}
+
+    <input type="submit" value="save">
+
+</form>
+
+{% endblock %}

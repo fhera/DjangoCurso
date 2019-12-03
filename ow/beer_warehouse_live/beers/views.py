@@ -8,7 +8,7 @@ from django.views.generic.edit import UpdateView
 
 from beers.mixins import AddMyBirthdayToContextMixin
 
-from .forms import CompanyForm, CompanyFormOld
+from .forms import BeerFormset, CompanyForm, CompanyFormOld
 from .models import Beer, Company
 
 
@@ -27,11 +27,48 @@ class CompanyDetailView(DetailView):
 class CompanyListView(ListView):
     model = Company
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        self.request.session["counter"] = self.request.session.get(
+            'counter', 0) + 1
+
+        context["counter"] = self.request.session['counter']
+        return context
+
 
 class CompanyCreateView(CreateView):
     model = Company
     form_class = CompanyForm
     success_url = reverse_lazy('company-list-view')
+
+
+class CompanyAndBeersCreateView(CreateView):
+    model = Company
+    form_class = CompanyForm
+    template_name = "beers/comany_create_with_beers.html"
+    success_url = reverse_lazy('company-list-view')
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        if self.request.POST:
+            ctx['beer_formset'] = BeerFormset(self.request.POST)
+        else:
+            ctx['beer_formset'] = BeerFormset()
+        return ctx
+
+    def form_valid(self, form):
+        ctx = self.get_context_data()
+        beer_formset = ctx['beer_formset']
+
+        if beer_formset.is_valid():
+            self.object = form.save()
+            beer_formset.instance = self.object
+            beer_formset.save()
+
+        return super().form_valid(form)
+
 
 class CompanyUpdateView(UpdateView):
     model = Company
@@ -39,39 +76,39 @@ class CompanyUpdateView(UpdateView):
     success_url = reverse_lazy('company-list-view')
 
 
-def company_edit(request, pk):
-    company = get_object_or_404(Company, pk=pk)
-    if request.method == 'POST':
-        form = CompanyForm(request.POST, instance=company)
-        if form.is_valid():
-            form.save()
-    else:
-        form = CompanyForm(instance=company)
+# def company_edit(request, pk):
+#     company = get_object_or_404(Company, pk=pk)
+#     if request.method == 'POST':
+#         form = CompanyForm(request.POST, instance=company)
+#         if form.is_valid():
+#             form.save()
+#     else:
+#         form = CompanyForm(instance=company)
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'company/company_form.html', context)
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'company/company_form.html', context)
 
 
-def company_edit_old(request, pk):
-    company = get_object_or_404(Company, pk=pk)
-    if request.method == 'POST':
-        form = CompanyFormOld(request.POST)
-        if form.is_valid():
-            company.name = form.cleaned_data['name']
-            company.tax_number = form.cleaned_data['tax_number']
-            company.save()
-    else:
-        form = CompanyForm(initial={
-            'name': company.name,
-            'tax_number': company.tax_number,
-        })
+# def company_edit_old(request, pk):
+#     company = get_object_or_404(Company, pk=pk)
+#     if request.method == 'POST':
+#         form = CompanyFormOld(request.POST)
+#         if form.is_valid():
+#             company.name = form.cleaned_data['name']
+#             company.tax_number = form.cleaned_data['tax_number']
+#             company.save()
+#     else:
+#         form = CompanyForm(initial={
+#             'name': company.name,
+#             'tax_number': company.tax_number,
+#         })
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'company/company_form.html', context)
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'company/company_form.html', context)
 
 
 # def beer_list_view(request):

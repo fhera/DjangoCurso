@@ -18,11 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 
 from beer_warehouse import settings
+from rest_framework import routers
+from beers.api import views
+
+# Django restframework
+router = routers.DefaultRouter()
+router.register(r'beers', views.BeerViewSet)
+router.register(r'company', views.CompanyViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('beers/', include('beers.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+
+    path('api/', include(router.urls))
 ]
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
 #     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

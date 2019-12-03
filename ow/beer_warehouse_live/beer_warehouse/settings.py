@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
+    'rest_framework',
+
     'beers',
     'bars',
 ]
@@ -49,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'core.middleware.access_denied_not_admin'
 ]
 
 ROOT_URLCONF = 'beer_warehouse.urls'
@@ -129,3 +135,5 @@ MEDIAFILES_DIRS = (
     'media',
 )
 LOGIN_REDIRECT_URL = 'beer-list-view'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
