@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.utils.translation import pgettext
 from django.views import View
 from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import UpdateView
@@ -24,16 +25,22 @@ class CompanyDetailView(DetailView):
     model = Company
 
 
-class CompanyListView(ListView):
+class CompanyListView(LoginRequiredMixin, ListView):
     model = Company
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+
+    #     self.request.session["counter"] = self.request.session.get(
+    #         'counter', 0) + 1
+
+    #     context["counter"] = self.request.session['counter']
+    #     return context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        self.request.session["counter"] = self.request.session.get(
-            'counter', 0) + 1
-
-        context["counter"] = self.request.session['counter']
+        context["may_month"] = pgettext("months", "May")
+        context["may_person"] = pgettext("person", "May")
         return context
 
 

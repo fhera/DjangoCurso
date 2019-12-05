@@ -2,13 +2,13 @@ from django.db import models
 
 from beers.utils import image_upload_location
 from core.models import CommonInfo
-
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 
 
 class Company(CommonInfo):
-    name = models.CharField('Name', max_length=50)
+    name = models.CharField(_('Name'), max_length=50)
     tax_number = models.IntegerField('Tax number', unique=True)
 
     class Meta:

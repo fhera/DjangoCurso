@@ -53,8 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-    'core.middleware.access_denied_not_admin'
+
+    # 'core.middleware.access_denied_not_admin',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'beer_warehouse.urls'
@@ -137,3 +138,13 @@ MEDIAFILES_DIRS = (
 LOGIN_REDIRECT_URL = 'beer-list-view'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser'
+    ],
+}
+
+LOCALE_PATHS = (
+    'beer_warehouse/locale',
+)

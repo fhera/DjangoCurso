@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-04 12:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: beers/models.py:11
+msgid "Name"
+msgstr "Nombre"
+
+#: beers/templates/beers/company_list.html:6
+msgid "Companies"
+msgstr "Compañias"
+
+#: beers/templates/beers/company_list.html:27
+#, python-format
+msgid " I love %(object_list)s because ... "
+msgstr "Me encanta %(object_list)s porque ..."
+
+#: beers/templates/beers/company_list.html:31
+msgid "I want to sit on"
+msgstr "Quiero sentarme en la"
+
+#: beers/templates/beers/company_list.html:31
+msgctxt "sittings"
+msgid "bank"
+msgstr "banqueta"
+
+#: beers/templates/beers/company_list.html:34
+msgid "I'm going to get money"
+msgstr "Voy a sacar dinero del "
+
+#: beers/templates/beers/company_list.html:34
+msgctxt "money"
+msgid "bank"
+msgstr "banco"
+
+#: beers/views.py:42
+msgctxt "months"
+msgid "May"
+msgstr "Mayo"
+
+#: beers/views.py:43
+msgctxt "person"
+msgid "May"
+msgstr "May"

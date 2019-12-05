@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load i18n %}
 
 {% block content %}
 
+<h2>{% trans "Companies" %}</h2>
 <div>
     <ul>
         {% for company in object_list %}
@@ -19,6 +20,22 @@
     </p>
 </div>
 
-<p> {{ counter }} </p>
+{% comment %} <p> {{ counter }} </p> {% endcomment %}
+
+<p>
+    {% blocktrans %} I love {{ object_list }} because ... {% endblocktrans %}
+</p>
+
+<p>
+    {% trans 'I want to sit on'%} {% blocktrans context 'sittings'%}bank{% endblocktrans %}
+</p>
+<p>
+    {% trans "I'm going to get money"%} {% blocktrans context 'money'%}bank{% endblocktrans %}
+</p>
+
+<p>
+    Month: {{may_month}} <br>
+    Person: {{may_person}}
+</p>
 
 {% endblock %}

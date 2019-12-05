@@ -12,7 +12,7 @@ from ..models import Beer, Company
 class BeerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Beer
-        fields = ('name', 'abv', 'color', 'is_filter')
+        fields = ('name', 'abv', 'color', 'is_filter', "company")
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
